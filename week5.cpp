@@ -114,8 +114,9 @@ int main(int argc, const char * argv[]) {
     cout << "The greatest number of planes that landed in a single day is " << lax.planesLanded[largestLandingIndex] << " which occured in the month of " << months[largestLandingIndex] << endl;
     cout << "The greatest number of planes that departed in a single day is " << lax.planesDeparted[largestDepartIndex] << " which occured in the month of " << months[largestDepartIndex] << endl;
     cout << "The least number of planes that departed in a single day is " << findSmallest(lax.smallestNumLanded) << " which occured in the month of " << months[smallestNumLanded] << endl;
-    cin.get();
     cin.ignore();
+    cin.get();
+
     
     return 0;
 }
