@@ -91,7 +91,16 @@ int findAverage(int values[]){
 
 
 int main(int argc, const char * argv[]) {
-
+    int studentId1, studentId2;
+    studentId1 = 900536880;
+    studentId2 = 900914917;
+    string nameStudent1, nameStudent2;
+    nameStudent1 = "Jordon Marchesano";
+    nameStudent2 = "Glen Dsouza";
+    cout  << left << setw(18) << "Student Name: " << nameStudent1 << endl;
+    cout  << left << setw(18) << "Student ID: " << studentId1 << endl;
+    cout  << left << setw(18) << "Student Name: " << nameStudent2 << endl;
+    cout  << left << setw(18) << "Student ID: " << studentId2 << "\n" << endl;
     promptFunc(lax);
     int largestDepartIndex = findLargest(lax.planesDeparted);
     int largestLandingIndex = findLargest(lax.planesLanded);
