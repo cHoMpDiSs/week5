@@ -31,7 +31,7 @@ void promptFunc();
 int findSmallest(int[]);
 int findLargest(int[]);
 int findTotal(int[]);
-int findAverage(int[]);
+float findAverage(int[]);
 void promptFunc (Airport &lax){
     string planesDepartedPrompt = "Please enter the number of planes that departed in ";
     string planesLandedPrompt = "Please enter the number of planes that landed in ";
@@ -87,8 +87,8 @@ int findTotal(int values[]){
     return total;
 }
 
-int findAverage(int values[]){
-    return findTotal(values) / 12;
+float findAverage(int values[]){
+    return findTotal(values) / 12.0;
 }
 
 
@@ -104,11 +104,10 @@ int main(int argc, const char * argv[]) {
     cout  << left << setw(18) << "Student Name: " << nameStudent2 << endl;
     cout  << left << setw(18) << "Student ID: " << studentId2 << "\n" << endl;
     promptFunc(lax);
-    int largestDepartIndex = findLargest(lax.planesDeparted);
     int largestLandingIndex = findLargest(lax.planesLanded);
     int smallestNumLanded = findSmallest(lax.smallestNumLanded);
-    cout << "The average monthly landings for the year is " << findAverage(lax.planesLanded) << endl;
-    cout << "The average monthly departures for the year is " << findAverage(lax.planesDeparted) << endl;
+    cout << "The average monthly landings for the year is " << fixed << setprecision(2) << findAverage(lax.planesLanded) << endl;
+    cout << "The average monthly departures for the year is " << fixed << setprecision(2) << findAverage(lax.planesDeparted) << endl;
     cout << "The total landings for the year is " << findTotal(lax.planesLanded) << endl;
     cout << "The total departures for the year is " << findTotal(lax.planesDeparted) << endl;
     cout << "The greatest number of planes that landed in a single day is " << lax.planesLanded[largestLandingIndex] << " which occured in the month of " << months[largestLandingIndex] << endl;
