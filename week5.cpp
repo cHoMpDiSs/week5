@@ -18,77 +18,162 @@ string months[MONTHS] = {
         "July", "August", "September", "October", "November", "December"
     };
 struct Airport  {
-    int planesLanded[MONTHS];
-    int planesDeparted[MONTHS];
-    int greatestNumLanded[MONTHS];
-    int smallestNumLanded[MONTHS];
+    int planesLanded;
+    int planesDeparted;
+    int greatestLanded;
+    int leastLanded;
   
 };
 
-
-Airport lax;
+Airport lax[MONTHS];
 void promptFunc();
 int findSmallest(int[]);
 int findLargest(int[]);
 int findTotal(int[]);
 float findAverage(int[]);
-void promptFunc (Airport &lax){
+void promptFunc (Airport lax[]){
     string planesDepartedPrompt = "Please enter the number of planes that departed in ";
     string planesLandedPrompt = "Please enter the number of planes that landed in ";
     string leastLanded = "Please enter the least number of planes that landed in a single day in ";
-    string mostLanded = "Please enter the greatest number of planes that landed in a single day in ";
+    string greatestLanded = "Please enter the greatest number of planes that landed in a single day in ";
 
 
     for (int j = 0; j < MONTHS; j ++){
 
         cout << planesLandedPrompt << months[j] << ": ";
-        cin >> lax.planesLanded[j];
+        cin >> lax[j].planesLanded;
         cout << planesDepartedPrompt << months[j] << ": " ;
-        cin >> lax.planesDeparted[j];
-        cout << mostLanded << months[j] << ": " ;
-        cin >> lax.greatestNumLanded[j];
+        cin >> lax[j].planesDeparted;
+        cout << greatestLanded << months[j] << ": " ;
+        cin >> lax[j].greatestLanded;
         cout << leastLanded << months[j] << ": " ;
-        cin >> lax.smallestNumLanded[j];
+        cin >> lax[j].leastLanded;
     }
     
 }
 
-int findSmallest(int values[]) {
-    int temp = values[0];
+int findSmallest(Airport lax[], string type) {
+    int temp = 0;
     int index = 0;
-    
-    for (int i = 0; i < MONTHS; i++) {
-        if (values[i] == 0) {
-            return i;
-        } else if (values[i] < temp) {
-            temp = values[i];
-            index = i;
+
+    if (type == "planesLanded") {
+        temp = lax[0].planesLanded;
+        for (int i = 0; i < MONTHS; i++) {
+            if (lax[i].planesLanded == 0) {
+                return i;
+            } else if (lax[i].planesLanded < temp) {
+                temp = lax[i].planesLanded;
+                index = i;
+            }
+        }
+    } else if (type == "planesDeparted") {
+        temp = lax[0].planesDeparted;
+        for (int i = 0; i < MONTHS; i++) {
+            if (lax[i].planesDeparted == 0) {
+                return i;
+            } else if (lax[i].planesDeparted < temp) {
+                temp = lax[i].planesDeparted;
+                index = i;
+            }
+        }
+    } else if (type == "leastLanded") {
+        temp = lax[0].leastLanded;
+        for (int i = 0; i < MONTHS; i++) {
+            if (lax[i].leastLanded == 0) {
+                return i;
+            } else if (lax[i].leastLanded < temp) {
+                temp = lax[i].leastLanded;
+                index = i;
+            }
+        }
+    } else if (type == "greatestLanded") {
+        temp = lax[0].greatestLanded;
+        for (int i = 0; i < MONTHS; i++) {
+            if (lax[i].greatestLanded == 0) {
+                return i;
+            } else if (lax[i].greatestLanded < temp) {
+                temp = lax[i].greatestLanded;
+                index = i;
+            }
+        }
+    }
+
+    return index;
+}
+
+
+int findLargest(Airport lax[], string type) {
+    int temp = 0, index = 0;
+
+    if (type == "planesLanded") {
+        temp = lax[0].planesLanded;
+        for (int i = 0; i < MONTHS; i++) {
+            if (lax[i].planesLanded > temp) {
+                temp = lax[i].planesLanded;
+                index = i;
+            }
+        }
+    } else if (type == "planesDeparted") {
+        temp = lax[0].planesDeparted;
+        for (int i = 0; i < MONTHS; i++) {
+            if (lax[i].planesDeparted > temp) {
+                temp = lax[i].planesDeparted;
+                index = i;
+            }
+        }
+    } else if (type == "leastLanded") {
+        temp = lax[0].leastLanded;
+        for (int i = 0; i < MONTHS; i++) {
+            if (lax[i].leastLanded > temp) {
+                temp = lax[i].leastLanded;
+                index = i;
+            }
+        }
+    } else if (type == "greatestLanded") {
+        temp = lax[0].greatestLanded;
+        for (int i = 0; i < MONTHS; i++) {
+            if (lax[i].greatestLanded > temp) {
+                temp = lax[i].greatestLanded;
+                index = i;
+            }
         }
     }
     return index;
 }
 
-int findLargest(int values[]) {
-    int temp = values[0];
-    int index = 0;
-    for (int i = 0; i < MONTHS; i++) {
-        if (values[i] > temp) {
-            temp = values[i];
-            index = i;
-        }
-    }
-    return index;
-}
-int findTotal(int values[]){
+
+
+int findTotal(Airport lax[], string type){
     int total = 0;
-    for (int i = 0; i < MONTHS; i++){
-        total += values[i];
+    if (type == "planesDeparted") {
+        
+        for (int i = 0; i < MONTHS; i++){
+            total += lax[i].planesDeparted;
+        }
+    }
+    else if (type == "planesLanded"){
+        for (int i = 0; i < MONTHS; i++){
+            total += lax[i].planesLanded;
+        }
     }
     return total;
 }
 
-float findAverage(int values[]){
-    return findTotal(values) / 12.0;
+float findAverage(Airport lax[], string type){
+    int total = 0;
+    if (type == "planesDeparted") {
+        
+        for (int i = 0; i < MONTHS; i++){
+            total += lax[i].planesDeparted;
+        }
+    }
+    else if (type == "planesLanded"){
+        for (int i = 0; i < MONTHS; i++){
+            total += lax[i].planesLanded;
+        }
+    }
+    return total / 12;
+
 }
 
 
@@ -104,14 +189,14 @@ int main(int argc, const char * argv[]) {
     cout  << left << setw(18) << "Student Name: " << nameStudent2 << endl;
     cout  << left << setw(18) << "Student ID: " << studentId2 << "\n" << endl;
     promptFunc(lax);
-    int largestLandingIndex = findLargest(lax.planesLanded);
-    int smallestNumLanded = findSmallest(lax.smallestNumLanded);
-    cout << "The average monthly landings for the year is " << fixed << setprecision(2) << findAverage(lax.planesLanded) << endl;
-    cout << "The average monthly departures for the year is " << fixed << setprecision(2) << findAverage(lax.planesDeparted) << endl;
-    cout << "The total landings for the year is " << findTotal(lax.planesLanded) << endl;
-    cout << "The total departures for the year is " << findTotal(lax.planesDeparted) << endl;
-    cout << "The greatest number of planes that landed in a single day is " << lax.planesLanded[largestLandingIndex] << " which occured in the month of " << months[largestLandingIndex] << endl;
-    cout << "The least number of planes that departed in a single day is " << findSmallest(lax.smallestNumLanded) << " which occured in the month of " << months[smallestNumLanded] << endl;
+    int largestLandingIndex = findLargest(lax, "greatestLanded");
+    int smallestLandingIndex = findSmallest(lax, "leastLanded");
+    cout << "The average monthly landings for the year is " << fixed << setprecision(2) << findAverage(lax, "planesLanded") << endl;
+    cout << "The average monthly departures for the year is " << fixed << setprecision(2) << findAverage(lax, "planesDeparted") << endl;
+    cout << "The total landings for the year is " << findTotal(lax, "planesLanded") << endl;
+    cout << "The total departures for the year is " << findTotal(lax, "planesDeparted") << endl;
+    cout << "The greatest number of planes that landed in a single day is " << lax[largestLandingIndex].greatestLanded<< " which occured in the month of " << months[largestLandingIndex] << endl;
+    cout << "The least number of planes that departed in a single day is " << lax[smallestLandingIndex].leastLanded << " which occured in the month of " << months[smallestLandingIndex] << endl;
     cin.ignore();
     cin.get();
 
