@@ -86,7 +86,7 @@ int findTotal(int values[]){
 }
 
 int findAverage(int values[]){
-    return findTotal(values) / 4;
+    return findTotal(values) / 12;
 }
 
 
